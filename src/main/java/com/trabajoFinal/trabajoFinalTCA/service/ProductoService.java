@@ -30,7 +30,7 @@ public class ProductoService implements IProductoService {
     }
 
     @Override
-    public List<Producto> findProducto(Long id) {
+    public Optional<Producto> findProducto(Long id) {
          return productoRepository.findById(id);
 
     }
