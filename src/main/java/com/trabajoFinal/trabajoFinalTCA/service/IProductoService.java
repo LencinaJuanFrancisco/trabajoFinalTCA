@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IProductoService {
+   
     public List<Producto> getProductos();
 
     public void saveProducto(Producto producto);
@@ -14,5 +15,5 @@ public interface IProductoService {
 
     public Optional<Producto> findProducto(Long id);
 
-    public void editProducto(Producto producto);
+    public Producto editProducto(Producto producto,Long id) throws Exception;
 }

@@ -3,10 +3,12 @@ package com.trabajoFinal.trabajoFinalTCA.service;
 import com.trabajoFinal.trabajoFinalTCA.model.Producto;
 import com.trabajoFinal.trabajoFinalTCA.repository.IProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class ProductoService implements IProductoService {
     @Autowired
     private IProductoRepository productoRepository;
@@ -15,7 +17,7 @@ public class ProductoService implements IProductoService {
     @Override
     public List<Producto> getProductos() {
         List<Producto> listadoProducto = productoRepository.findAll();
-        return listadoProducto;
+        return listadoProducto; 
     }
 
     @Override
@@ -36,7 +38,26 @@ public class ProductoService implements IProductoService {
     }
 
     @Override
-    public void editProducto(Producto producto) {
-        this.saveProducto(producto);
+    public Producto editProducto(Producto producto,Long id) throws Exception {
+
+        Optional<Producto> buscarProducto = productoRepository.findById(id);
+        
+        if (!buscarProducto.isPresent()) {
+          
+            throw new Exception("Producto no encontrado");
+        }
+        
+        Producto newProducto = buscarProducto.get();
+
+        newProducto.setNombre(producto.getNombre());
+        newProducto.setMarca(producto.getMarca());
+        newProducto.setCosto(producto.getCosto());
+        newProducto.setCantidad_disponible(producto.getCantidad_disponible());
+
+        productoRepository.save(newProducto);
+        
+        return newProducto;
     }
+
+   
 }

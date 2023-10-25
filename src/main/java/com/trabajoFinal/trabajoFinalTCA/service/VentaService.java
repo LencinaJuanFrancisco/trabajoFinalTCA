@@ -3,11 +3,11 @@ package com.trabajoFinal.trabajoFinalTCA.service;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.stereotype.Service;
 
 import com.trabajoFinal.trabajoFinalTCA.model.Venta;
 import com.trabajoFinal.trabajoFinalTCA.repository.IVentaRepository;
-
+@Service
 public class VentaService implements IVentaService {  // Cambio de IVentaRepository a IVentaService
 
     @Autowired
