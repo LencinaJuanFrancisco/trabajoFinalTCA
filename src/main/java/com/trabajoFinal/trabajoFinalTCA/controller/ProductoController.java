@@ -25,34 +25,31 @@ public class ProductoController {
 
     @GetMapping("/productos")
     public List<Producto> getProductos() {
-     return productoServicio.getProductos();
+        return productoServicio.getProductos();
     }
-       
 
     @PostMapping("/productos/crear")
-    public void saveProducto(@RequestBody Producto producto){
+    public void saveProducto(@RequestBody Producto producto) {
         productoServicio.saveProducto(producto);
     }
 
     @GetMapping("/productos/{codigo_producto}")
-    public Optional<Producto> findProducto(@PathVariable Long codigo_producto ){
-            return productoServicio.findProducto(codigo_producto);
+    public Optional<Producto> findProducto(@PathVariable Long codigo_producto) {
+        return productoServicio.findProducto(codigo_producto);
     }
 
     @DeleteMapping("/productos/eliminar/{codigo_producto}")
-    public void deleteProducto(@PathVariable Long codigo_producto  ){
+    public void deleteProducto(@PathVariable Long codigo_producto) {
         productoServicio.deleteProducto(codigo_producto);
     }
 
     @PutMapping("/productos/editar/{codigo_producto}")
     public Producto editProducto(@PathVariable Long codigo_producto,
-                            @RequestBody Producto producto) throws Exception{
+            @RequestBody Producto producto) throws Exception {
 
-           Producto newProducto = productoServicio.editProducto(producto,codigo_producto);
+        Producto newProducto = productoServicio.editProducto(producto, codigo_producto);
 
-          return newProducto;
+        return newProducto;
     }
-    
 
-    
 }

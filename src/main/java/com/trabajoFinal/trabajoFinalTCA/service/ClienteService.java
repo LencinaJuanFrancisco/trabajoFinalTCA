@@ -23,7 +23,7 @@ public class ClienteService implements IClienteService {
 
     @Override
     public void saveCliente(Cliente cliente) {
-       clienteRepository.save(cliente);
+        clienteRepository.save(cliente);
     }
 
     @Override
@@ -33,35 +33,32 @@ public class ClienteService implements IClienteService {
 
     @Override
     public Optional<Cliente> findCliente(Long id) {
-       return clienteRepository.findById(id);
+        return clienteRepository.findById(id);
     }
 
     @Override
     public Cliente editCliente(Long id, Cliente cliente) throws Exception {
-     Optional<Cliente> buscarCliente = clienteRepository.findById(id);
+        Optional<Cliente> buscarCliente = clienteRepository.findById(id);
 
-     if(!buscarCliente.isPresent()){
-        throw new Exception("Cliente no encontrado");
-     }
-    Cliente newCliente = buscarCliente.get();
-    
-    if (cliente.getNombre() != null) {
-        newCliente.setNombre(cliente.getNombre());
+        if (!buscarCliente.isPresent()) {
+            throw new Exception("Cliente no encontrado");
+        }
+        Cliente newCliente = buscarCliente.get();
+
+        if (cliente.getNombre() != null) {
+            newCliente.setNombre(cliente.getNombre());
+        }
+
+        if (cliente.getApellido() != null) {
+            newCliente.setApellido(cliente.getApellido());
+        }
+
+        if (cliente.getDni() != null) {
+            newCliente.setDni(cliente.getDni());
+        }
+
+        clienteRepository.save(newCliente);
+        return newCliente;
     }
 
-    // Actualiza el campo "apellido" si se proporciona en el objeto de entrada
-    if (cliente.getApellido() != null) {
-        newCliente.setApellido(cliente.getApellido());
-    }
-
-    // Actualiza el campo "dni" si se proporciona en el objeto de entrada
-    if (cliente.getDni() != null) {
-        newCliente.setDni(cliente.getDni());
-    }
-
-    clienteRepository.save(newCliente);
-    return newCliente;
-    }
-
-    
 }
