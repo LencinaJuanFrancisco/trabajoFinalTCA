@@ -13,11 +13,10 @@ public class ProductoService implements IProductoService {
     @Autowired
     private IProductoRepository productoRepository;
 
-
     @Override
     public List<Producto> getProductos() {
         List<Producto> listadoProducto = productoRepository.findAll();
-        return listadoProducto; 
+        return listadoProducto;
     }
 
     @Override
@@ -33,31 +32,44 @@ public class ProductoService implements IProductoService {
 
     @Override
     public Optional<Producto> findProducto(Long id) {
-         return productoRepository.findById(id);
+        return productoRepository.findById(id);
 
     }
 
     @Override
-    public Producto editProducto(Producto producto,Long id) throws Exception {
+    public Producto editProducto(Producto producto, Long id) throws Exception {
 
         Optional<Producto> buscarProducto = productoRepository.findById(id);
-        
+
         if (!buscarProducto.isPresent()) {
-          
+
             throw new Exception("Producto no encontrado");
         }
-        
+
         Producto newProducto = buscarProducto.get();
 
-        newProducto.setNombre(producto.getNombre());
-        newProducto.setMarca(producto.getMarca());
-        newProducto.setCosto(producto.getCosto());
-        newProducto.setCantidad_disponible(producto.getCantidad_disponible());
+        
+        if (producto.getNombre() != null) {
+            newProducto.setNombre(producto.getNombre());
+        }
+
+      
+        if (producto.getMarca() != null) {
+            newProducto.setMarca(producto.getMarca());
+        }
+
+       
+        if (producto.getCosto() != null) {
+            newProducto.setCosto(producto.getCosto());
+        }
+
+        if (producto.getCantidad_disponible() != null) {
+            newProducto.setCantidad_disponible(producto.getCantidad_disponible());
+        }
 
         productoRepository.save(newProducto);
-        
+
         return newProducto;
     }
 
-   
 }
